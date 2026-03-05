@@ -9,7 +9,7 @@ if [ $? -ne 0 ]; then
 fi;
 
 #Rodar os testes
-php artisan teste --parallel
+php artisan test --parallel
 if [ $? -ne 0 ]; then
     echo "Opa! Deu ruim aqui com algum teste. Arrume antes de continuar... 😉";
     exit 1;
