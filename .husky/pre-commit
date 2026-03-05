@@ -8,6 +8,13 @@ if [ $? -ne 0 ]; then
     exit 1;
 fi;
 
+#Rodar os testes
+php artisan teste --parallel
+if [ $? -ne 0 ]; then
+    echo "Opa! Deu ruim aqui com algum teste. Arrume antes de continuar... 😉";
+    exit 1;
+fi;
+
 # rodar os testes
 php artisan test --parallel | php
 if [ $? -ne 0 ]; then
