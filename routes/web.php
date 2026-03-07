@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\{ProfileController, QuestionController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
