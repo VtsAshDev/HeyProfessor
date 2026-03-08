@@ -49,7 +49,7 @@ it('should check if ends with question mark ? ', function () {
         'question' => str_repeat('*', 10),
     ]);
 
-    // Act :: agir
+    // Assert :: verificar
     $request->assertSessionHasErrors([
         'question' => 'Are you sure is a question? It is missing a question mark in the end.',
     ]);
