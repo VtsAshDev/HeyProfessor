@@ -4,8 +4,8 @@
     'put' => null,
     'delete' => null
 ])
-<div class="p-6 text-gray-900 dark:text-gray-100">
-    <form action = "{{route('question.store')}}" method="post">
+<div class="">
+    <form action = "{{$action}}" method="post">
         @csrf
 
         @if($put)
