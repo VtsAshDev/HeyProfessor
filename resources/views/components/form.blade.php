@@ -4,7 +4,7 @@
     'put' => null,
     'delete' => null
 ])
-<div class="p-6 text-gray-900 dark:text-gray-100">
+<div class="">
     <form action = "{{$action}}" method="post">
         @csrf
 
