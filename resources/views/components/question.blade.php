@@ -7,11 +7,14 @@
         {{ $question->question }}
     </div>
     <div>
+        <pre>
+            @dump($question->toArray())
+        </pre>
         <x-form :action="route('question.like', $question)" class="">
         <button  class="flex items-center justify-center space-x-2 text-green-500 hover:text-green-300">
             <x-icons.thumbs-up class="w-5 h-5  cursor-pointer"/>
             <span>
-                {{ $question->likes }}
+                {{ $question->votes_sum_like ?: 0 }}
             </span>
         </button>
         </x-form>
@@ -19,7 +22,7 @@
             <button  class="flex items-center justify-center space-x-2 text-red-500 hover:text-red-300">
                 <x-icons.thumbs-down class="w-5 h-5  cursor-pointer"/>
                 <span>
-                {{ $question->unlikes }}
+                {{ $question->votes_sum_unlike ?: 0 }}
             </span>
             </button>
         </x-form>
