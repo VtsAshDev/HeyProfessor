@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Rules\EndWithQuestionMarkRule;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class QuestionController extends Controller
 {
+    public function index(): View
+    {
+
+        return view('question.index', [
+            'questions' => user()->questions,
+        ]);
+    }
+
     public function store(): RedirectResponse
     {
         $attributes = request()->validate([
@@ -22,6 +31,6 @@ class QuestionController extends Controller
             'draft'    => true,
         ]);
 
-        return redirect(route('dashboard'));
+        return back();
     }
 }
