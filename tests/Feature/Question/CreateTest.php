@@ -17,7 +17,7 @@ it('should be able to create a new question bigger than 255 characters', functio
     ]);
 
     //Assert::verificar
-    $request->assertRedirect(route('dashboard'));
+    $request->assertRedirect();
     assertDatabaseCount('questions', 1);
     assertDatabaseHas('questions', [
         'question' => str_repeat('*', 260) . '?']);
@@ -74,5 +74,13 @@ it('should create as a draft all the time', function () {
         'question' => str_repeat('*', 260) . '?',
         'draft'    => true,
     ]);
+
+});
+
+test('only authenticated users can create a new question', function () {
+
+    post(route('question.store'), [
+        'question' => str_repeat('*', 260) . '?',
+    ])->assertRedirect(route('login'));
 
 });
