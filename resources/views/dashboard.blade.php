@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-header>
-        <x-slot name="header">
+    <x-slot name="header">
+        <x-header>
             {{ __('Vote for a question') }}
-        </x-slot>
-    </x-header>
+        </x-header>
+    </x-slot>
 
 
     <x-container>
