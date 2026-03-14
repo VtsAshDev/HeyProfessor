@@ -47,6 +47,14 @@ class QuestionController extends Controller
     public function update(Question $question): RedirectResponse
     {
         Gate::authorize('update', $question);
+        request()->validate([
+            'question' => [
+                'required',
+                'min:10',
+                new EndWithQuestionMarkRule(),
+            ],
+        ]);
+
         $question->question = request()->question;
 
         $question->save();
