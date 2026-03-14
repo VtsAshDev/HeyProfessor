@@ -21,3 +21,45 @@ it('should be able to update a question', closure: function () {
 
     expect($question)->question->toBe('Updated Question?');
 });
+
+it('souhld mae sure only question with status "DRAFT" can be edited ', function () {
+    $user = User::factory()->create();
+
+    $questionNotDraft = Question::factory()->for($user, 'createdBy')
+        ->create([
+            'draft' => false,
+        ]);
+    $draftQuestion = Question::factory()->for($user, 'createdBy')
+        ->create([
+            'draft' => true,
+        ]);
+
+    actingAs($user);
+
+    put(route('question.update', $questionNotDraft), [
+        'question' => 'Updated Question?',
+    ])->assertForbidden();
+    put(route('question.update', $draftQuestion), [
+        'question' => 'Updated Question?',
+    ])->assertRedirect();
+});
+
+it('should mae sure that only the person who has created the question can update it', function () {
+    $rightUser = User::factory()->create();
+    $wrongUser = User::factory()->create();
+
+    $question = Question::factory()->create([
+        'draft'      => true,
+        'created_by' => $rightUser->id,
+    ]);
+
+    actingAs($wrongUser);
+    put(route('question.update', $question), [
+        'question' => 'Updated Question?',
+    ])->assertForbidden();
+
+    actingAs($rightUser);
+    put(route('question.update', $question), [
+        'question' => 'Updated Question?',
+    ])->assertRedirect();
+});
