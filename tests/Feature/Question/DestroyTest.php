@@ -19,3 +19,21 @@ it('should be able to destroy a question', function () {
     assertDatabaseMissing('questions', ['id' => $question->id]);
 
 });
+
+it('should mae sure that only the person who has created the question can destroy it', function () {
+    $rightUser = User::factory()->create();
+    $wrongUser = User::factory()->create();
+
+    $question = Question::factory()->create([
+        'draft'      => true,
+        'created_by' => $rightUser->id,
+    ]);
+
+    actingAs($wrongUser);
+
+    delete(route('question.destroy', $question))->assertForbidden();
+
+    actingAs($rightUser);
+
+    delete(route('question.destroy', $question))->assertRedirect();
+});
