@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-use App\Rules\EndWithQuestionMarkRule;
+use App\Rules\{EndWithQuestionMarkRule, SameQuestionRule};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -27,6 +27,7 @@ class QuestionController extends Controller
                 'required',
                 'min:10',
                 new EndWithQuestionMarkRule(),
+                new SameQuestionRule(),
             ],
         ]);
 
