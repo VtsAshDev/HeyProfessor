@@ -38,6 +38,11 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
+                <x-primary-button class="ms-3">
+                    <a href="{{ route('github.login') }}">
+                        Login using :cat Github
+                    </a>
+                </x-primary-button>
 
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
