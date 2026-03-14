@@ -7,4 +7,4 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('model:prune')->dailyAt('6:00');
+Schedule::command('model:prune')->dailyAt('06:00:00');
