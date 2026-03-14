@@ -35,9 +35,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/unlike/{question}', Question\UnlikeController::class)->name('unlike');
         Route::put('/publish/{question}', Question\PublishController::class)->name('publish');
         Route::delete('/destroy/{question}', [QuestionController::class, 'destroy'])->name('destroy');
+        Route::patch('/archive/{question}', [QuestionController::class, 'archive'])->name('archive');
+        Route::patch('/restore/{question}', [QuestionController::class, 'restore'])->name('restore');
         Route::get('/edit/{question}', [QuestionController::class, 'edit'])->name('edit');
         Route::put('/update/{question}', [QuestionController::class, 'update'])->name('update');
-        Route::patch('/archive/{question}', [QuestionController::class, 'archive'])->name('archive');
     });
     #endregion
 });
