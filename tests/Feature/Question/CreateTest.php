@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\{Question, User};
 
 use function Pest\Laravel\{actingAs, assertDatabaseCount, assertDatabaseHas, post};
 
@@ -83,4 +83,18 @@ test('only authenticated users can create a new question', function () {
         'question' => str_repeat('*', 260) . '?',
     ])->assertRedirect(route('login'));
 
+});
+
+test('question should be unique', function () {
+    $user = User::factory()->create();
+
+    actingAs($user);
+
+    Question::factory()->create([
+        'question' => 'Alguma pergunta?',
+    ]);
+
+    post(route('question.store'), [
+        'question' => 'Alguma pergunta?',
+    ])->assertSessionHasErrors(['question' => 'Pergunta já existe!']);
 });
