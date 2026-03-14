@@ -1,5 +1,6 @@
 @props([
     'action',
+    'get' => null,
     'post' => null,
     'put' => null,
     'delete' => null,
@@ -11,6 +12,10 @@
 
     @if($put)
         @method('PUT')
+    @endif
+
+    @if($get)
+        @method('GET')
     @endif
 
     @if($patch)
