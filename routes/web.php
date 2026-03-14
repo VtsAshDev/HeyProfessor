@@ -37,6 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/destroy/{question}', [QuestionController::class, 'destroy'])->name('destroy');
         Route::get('/edit/{question}', [QuestionController::class, 'edit'])->name('edit');
         Route::put('/update/{question}', [QuestionController::class, 'update'])->name('update');
+        Route::patch('/archive/{question}', [QuestionController::class, 'archive'])->name('archive');
     });
     #endregion
 });

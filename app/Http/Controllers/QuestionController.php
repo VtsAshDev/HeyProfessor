@@ -66,6 +66,14 @@ class QuestionController extends Controller
     {
         Gate::authorize('destroy', $question);
 
+        $question->forceDelete();
+
+        return back();
+    }
+
+    public function archive(Question $question): RedirectResponse
+    {
+        Gate::authorize('archive', $question);
         $question->delete();
 
         return back();
