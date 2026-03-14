@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Database\Factories\QuestionFactory;
+use Illuminate\Database\Eloquent\{Builder, Model, Prunable, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class Question extends Model
@@ -13,6 +13,8 @@ class Question extends Model
      * @use HasFactory<QuestionFactory>
      */
     use HasFactory;
+    use SoftDeletes;
+    use Prunable;
 
     protected $casts = [
         'draft' => 'boolean',
@@ -34,4 +36,8 @@ class Question extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function prunable(): Builder
+    {
+        return static::where('deleted_at', '<=', now()->subMonth());
+    }
 }

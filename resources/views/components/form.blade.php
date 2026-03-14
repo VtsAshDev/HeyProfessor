@@ -2,20 +2,24 @@
     'action',
     'post' => null,
     'put' => null,
-    'delete' => null
+    'delete' => null,
+    'patch' => null
 ])
-<div class="">
-    <form action = "{{$action}}" method="post">
-        @csrf
 
-        @if($put)
-            @method('PUT')
-        @endif
+<form action = "{{$action}}" method="post" {{ $attributes }}>
+    @csrf
 
-        @if($delete)
-            @method('DELETE')
-        @endif
+    @if($put)
+        @method('PUT')
+    @endif
 
-        {{ $slot }}
-    </form>
-</div>
+    @if($patch)
+        @method('PATCH')
+    @endif
+
+    @if($delete)
+        @method('DELETE')
+    @endif
+
+    {{ $slot }}
+</form>
