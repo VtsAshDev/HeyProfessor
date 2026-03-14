@@ -41,6 +41,12 @@
                                 <x-btn.cancel type="submit">Delete</x-btn.cancel>
                             </x-form>
 
+                            <a href="{{ route('question.edit', $question) }}">
+                              <x-secondary-button>
+                               Editar
+                              </x-secondary-button>
+                            </a>
+
                         </x-table.td>
                     </x-table.tr>
                 @endforeach
