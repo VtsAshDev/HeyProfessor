@@ -14,8 +14,10 @@ class QuestionController extends Controller
     {
 
         return view('question.index', [
-            'questions' => user()->questions,
+            'questions'         => user()->questions,
+            'archivedQuestions' => user()->questions()->onlyTrashed()->get(),
         ]);
+
     }
 
     public function store(): RedirectResponse

@@ -37,7 +37,7 @@
                             <x-form :action="route('question.publish', $question)" put>
                                 <x-btn.primary type="submit">Publish</x-btn.primary>
                             </x-form>
-                            <x-form :action="route('question.destroy', $question)" delete>
+                            <x-form :action="route('question.destroy', $question)" delete onsubmit="return confirm('Tem certeza ?')">
                                 <x-btn.cancel type="submit">Delete</x-btn.cancel>
                             </x-form>
 
@@ -71,8 +71,45 @@
                     <x-table.tr>
                         <x-table.td> {{ $question->question }}</x-table.td>
                         <x-table.td>
-                            //botão de deletar
-                            //botão de editar
+                            <div class="flex items-center justify-start">
+                                <x-form :action="route('question.archive', $question)" patch>
+                                    <x-btn.edit>Archive</x-btn.edit>
+                                </x-form>
+                                <x-form :action="route('question.destroy', $question)" delete>
+                                    <x-btn.cancel>Delete</x-btn.cancel>
+                                </x-form>
+                            </div>
+                        </x-table.td>
+                    </x-table.tr>
+                @endforeach
+                </tbody>
+            </x-table>
+        </div>
+        <div class="dark:text-gray-400 uppercase font-bold pl-6 mb-1">
+            Archived Questions
+        </div>
+        <div class="dark:text-gray-400 p-6">
+
+            <x-table>
+                <x-table.head>
+                    <tr>
+                        <x-table.th> Question</x-table.th>
+                        <x-table.th> Actions</x-table.th>
+                    </tr>
+                </x-table.head>
+                <tbody>
+                @foreach($archivedQuestions as $question)
+                    <x-table.tr>
+                        <x-table.td> {{ $question->question }}</x-table.td>
+                        <x-table.td>
+                            <div class="flex items-center justify-start">
+                                <x-form :action="route('question.restore', $question)" patch>
+                                    <x-btn.primary>Restore</x-btn.primary>
+                                </x-form>
+                                <x-form :action="route('question.destroy', $question)" delete onsubmit="return confirm('Tem certeza ? ')">
+                                    <x-btn.cancel>Delete</x-btn.cancel>
+                                </x-form>
+                            </div>
                         </x-table.td>
                     </x-table.tr>
                 @endforeach
