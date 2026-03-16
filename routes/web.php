@@ -11,13 +11,13 @@ use App\Http\Controllers\Question;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    if (app()->isLocal()) {
-        auth()->loginUsingId(1);
+    //    if (app()->isLocal()) {
+    //        auth()->loginUsingId(1);
+    //
+    //        return to_route('dashboard');
+    //    }
 
-        return to_route('dashboard');
-    }
-
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/github/login', RedirectController::class)->name('github.login');
