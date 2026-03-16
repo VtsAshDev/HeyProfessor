@@ -18,6 +18,10 @@ it('should be able to list all question created by me', function () {
         ->count(10)
         ->create();
 
+    foreach ($rightQuestions as $q) {
+        $rightUser->like($q);
+    }
+
     actingAs($rightUser);
 
     $response = get(route('question.index'));
