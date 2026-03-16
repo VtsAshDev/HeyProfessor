@@ -27,8 +27,8 @@
                     @foreach($questions as $item)
                         <x-question :question="$item"/>
                     @endforeach
-                @else
                     {{ $questions->withQueryString()->links() }}
+                @else
                         <div class="flex flex-col items-center justify-center">
                             <x-draw-searching width="200" height="200"/>
                             <h1 class="text-3xl text-white-500 font-sans">
